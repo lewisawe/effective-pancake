@@ -171,30 +171,31 @@ const Contact: React.FC = () => {
         <SectionTitle title="[ Initiate Contact ]" />
       </div>
       <div 
-        className={`mt-12 w-full max-w-4xl mx-auto h-96 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+        className={`mt-12 w-full max-w-4xl mx-auto h-80 sm:h-96 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
         onClick={handleTerminalClick}
       >
-        <div className="bg-[#0d1421] border-2 border-cyan-400/30 rounded-md h-full flex flex-col font-mono text-sm shadow-lg shadow-cyan-500/10">
+        <div className="bg-[#0d1421] border-2 border-cyan-400/30 rounded-md h-full flex flex-col font-mono text-xs sm:text-sm shadow-lg shadow-cyan-500/10">
           <div className="bg-gray-800/50 p-2 flex items-center rounded-t-md text-xs">
-            <div className="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
-            <div className="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
-            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-            <span className="ml-auto text-gray-400">lewisksawe.dev -- -zsh</span>
+            <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full mr-1 sm:mr-2"></div>
+            <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full mr-1 sm:mr-2"></div>
+            <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
+            <span className="ml-auto text-gray-400 text-xs hidden sm:inline">lewisksawe.dev -- -zsh</span>
+            <span className="ml-auto text-gray-400 text-xs sm:hidden">terminal</span>
           </div>
-          <div ref={terminalBodyRef} className="flex-grow p-4 overflow-y-auto text-gray-300 leading-relaxed">
+          <div ref={terminalBodyRef} className="flex-grow p-2 sm:p-4 overflow-y-auto text-gray-300 leading-relaxed text-xs sm:text-sm">
             {history.map((line, index) => (
               <div key={index} dangerouslySetInnerHTML={{ __html: line.replace(/ /g, '&nbsp;') }} />
             ))}
             {step !== 'sending' && (
               <form onSubmit={handleCommandSubmit} className="flex">
-                <label htmlFor="terminal-input" className="text-cyan-400 shrink-0">
+                <label htmlFor="terminal-input" className="text-cyan-400 shrink-0 text-xs sm:text-sm">
                   {getPrompt().replace(/ /g, '\u00a0')}
                 </label>
                 <input
                   ref={inputRef}
                   id="terminal-input"
                   type="text"
-                  className="flex-grow bg-transparent border-none outline-none text-gray-200 pl-2 caret-cyan-400"
+                  className="flex-grow bg-transparent border-none outline-none text-gray-200 pl-1 sm:pl-2 caret-cyan-400 text-xs sm:text-sm"
                   value={command}
                   onChange={(e) => setCommand(e.target.value)}
                   autoComplete="off"

@@ -1,10 +1,10 @@
 # Lewis Sawe - Portfolio
 
-A cyberpunk-themed portfolio showcasing my cloud engineering and DevOps expertise.
+A modern portfolio showcasing my cloud engineering and DevOps expertise.
 
 ## Features
 
-- **Cyberpunk Design** - Dark theme with cyan accents and glitch effects
+- **Modern Design** - Dark theme with cyan accents and glitch effects
 - **Interactive Elements** - Hover effects, typing animations, and terminal-style contact form
 - **Real Integrations** - Working contact form with AWS Lambda + SNS
 - **Responsive** - Mobile-friendly design

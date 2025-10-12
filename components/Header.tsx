@@ -88,7 +88,7 @@ const Header: React.FC = () => {
     <header id="home" className="h-screen flex flex-col justify-center items-center text-center relative">
       <div className="w-full">
         <h1 
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-wider min-h-[5rem] sm:min-h-[6rem] md:min-h-[7rem] cursor-pointer"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white tracking-wider min-h-[4rem] sm:min-h-[5rem] md:min-h-[6rem] lg:min-h-[7rem] cursor-pointer px-4"
           onMouseEnter={() => setGlitchEnabled(true)}
           onMouseLeave={() => setGlitchEnabled(false)}
         >
@@ -97,13 +97,13 @@ const Header: React.FC = () => {
           {!nameFinished && <BlinkingCursor />}
         </h1>
         
-        <p className="mt-4 text-lg sm:text-xl md:text-2xl text-gray-300 font-light tracking-widest min-h-[2rem] sm:min-h-[2.5rem]">
+        <p className="mt-4 text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 font-light tracking-widest min-h-[1.5rem] sm:min-h-[2rem] md:min-h-[2.5rem] px-4">
           {typedTitle}
           {nameFinished && !titleFinished && <BlinkingCursor />}
         </p>
 
         <div className={`transition-opacity duration-1000 ${titleFinished ? 'opacity-100' : 'opacity-0'}`}>
-            <p className="mt-2 text-md text-gray-500 max-w-2xl mx-auto min-h-[1.5rem]">
+            <p className="mt-2 text-sm sm:text-base text-gray-500 max-w-2xl mx-auto min-h-[1.5rem] px-4">
               {typedSubtitle}
               {titleFinished && !subtitleFinished && <BlinkingCursor />}
             </p>
