@@ -1,12 +1,8 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
-
 # Lewis Sawe - Portfolio
 
 A cyberpunk-themed portfolio showcasing my cloud engineering and DevOps expertise.
 
-## 🚀 Features
+## Features
 
 - **Cyberpunk Design** - Dark theme with cyan accents and glitch effects
 - **Interactive Elements** - Hover effects, typing animations, and terminal-style contact form
@@ -14,14 +10,14 @@ A cyberpunk-themed portfolio showcasing my cloud engineering and DevOps expertis
 - **Responsive** - Mobile-friendly design
 - **Performance** - Optimized loading with custom loading screen
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Frontend**: React, TypeScript, Vite, Tailwind CSS
 - **Backend**: AWS Lambda, SNS
 - **Infrastructure**: Terraform
 - **Deployment**: Static hosting (Vercel/Netlify recommended)
 
-## 📦 Installation
+## Installation
 
 1. **Clone the repository**
    ```bash
@@ -45,7 +41,7 @@ A cyberpunk-themed portfolio showcasing my cloud engineering and DevOps expertis
    npm run dev
    ```
 
-## 🚀 Deployment
+## Deployment
 
 ### Frontend Deployment
 Deploy to Vercel, Netlify, or any static hosting service:
@@ -64,14 +60,14 @@ terraform plan -var="notification_email=your-email@example.com"
 terraform apply -var="notification_email=your-email@example.com"
 ```
 
-## 📧 Contact Form
+## Contact Form
 
 The contact form uses AWS Lambda + SNS for email notifications:
 - Users submit via terminal-style interface
 - Lambda processes and sends SNS notification
 - You receive email with contact details
 
-## 🎨 Customization
+## Customization
 
 - **Personal Info**: Update `constants.ts` with your details
 - **Projects**: Add your projects to the `PROJECTS` array
@@ -79,14 +75,14 @@ The contact form uses AWS Lambda + SNS for email notifications:
 - **Blog Posts**: Update `BLOG_POSTS` with your articles
 - **YouTube**: Add your video IDs to `YOUTUBE_VIDEOS`
 
-## 📄 License
+## License
 
 MIT License - feel free to use this as a template for your own portfolio!
 
-## 🤝 Contributing
+## Contributing
 
 Found a bug or want to suggest an improvement? Feel free to open an issue or submit a PR.
 
 ---
 
-Built with ❤️ by [Lewis Sawe](https://github.com/lewisawe)
+Built by [Lewis Sawe](https://github.com/lewisawe)
