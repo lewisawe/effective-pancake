@@ -1,0 +1,16 @@
+{
+  "name": "Lewis Sawe - Cloud Engineer Portfolio",
+  "short_name": "Lewis Sawe",
+  "description": "Cloud Engineer and DevOps specialist portfolio",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0f18",
+  "theme_color": "#06b6d4",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

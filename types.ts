@@ -4,6 +4,9 @@ export interface Skill {
   name: string;
   // Fix: The 'JSX' namespace is not available in a .ts file. Using ReactElement type instead.
   icon: ReactElement;
+  level: 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
+  experience: string;
+  description?: string;
 }
 
 export interface SkillCategory {

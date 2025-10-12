@@ -38,7 +38,7 @@ const Skills: React.FC = () => {
             {SKILL_CATEGORIES[activeTab].skills.map((skill, index) => (
               <div
                 key={skill.name}
-                className={`group p-4 bg-gray-800/30 border border-gray-700 rounded-lg hover:border-cyan-400/50 hover:bg-gray-800/50 transition-all duration-300 transform hover:scale-105 ${
+                className={`group relative p-4 bg-gray-800/30 border border-gray-700 rounded-lg hover:border-cyan-400/50 hover:bg-gray-800/50 transition-all duration-300 transform hover:scale-105 ${
                   isVisible ? 'animate-fade-in' : ''
                 }`}
                 style={{ animationDelay: `${index * 100}ms` }}
@@ -51,6 +51,14 @@ const Skills: React.FC = () => {
                     {skill.name}
                   </span>
                 </div>
+                
+                {/* Hover Description Tooltip */}
+                {skill.description && (
+                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 border border-cyan-400/30 rounded-lg text-xs text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10 w-64 text-center">
+                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-cyan-400/30"></div>
+                    {skill.description}
+                  </div>
+                )}
               </div>
             ))}
           </div>

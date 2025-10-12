@@ -7,52 +7,52 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
   {
     title: 'Cloud (AWS)',
     skills: [
-      { name: 'EC2', icon: React.createElement(EC2Icon) },
-      { name: 'S3', icon: React.createElement(S3Icon) },
-      { name: 'Lambda', icon: React.createElement(LambdaIcon) },
-      { name: 'RDS', icon: React.createElement(RDSIcon) },
-      { name: 'EKS', icon: React.createElement(EKSIcon) },
-      { name: 'VPC', icon: React.createElement(VPCIcon) },
-      { name: 'IAM', icon: React.createElement(IAMIcon) },
-      { name: 'CloudFormation', icon: React.createElement(CloudFormationIcon) },
-      { name: 'AWS General', icon: React.createElement(AwsIcon) },
+      { name: 'EC2', icon: React.createElement(EC2Icon), description: 'Deployed and managed scalable compute instances for web applications and microservices' },
+      { name: 'S3', icon: React.createElement(S3Icon), description: 'Built data lakes and static website hosting with lifecycle policies and cross-region replication' },
+      { name: 'Lambda', icon: React.createElement(LambdaIcon), description: 'Developed serverless APIs and event-driven architectures for cost-effective solutions' },
+      { name: 'RDS', icon: React.createElement(RDSIcon), description: 'Managed relational databases with automated backups and multi-AZ deployments' },
+      { name: 'EKS', icon: React.createElement(EKSIcon), description: 'Orchestrated containerized applications with auto-scaling and service mesh integration' },
+      { name: 'VPC', icon: React.createElement(VPCIcon), description: 'Designed secure network architectures with subnets, NAT gateways, and VPN connections' },
+      { name: 'IAM', icon: React.createElement(IAMIcon), description: 'Implemented least-privilege access controls and federated identity management' },
+      { name: 'CloudFormation', icon: React.createElement(CloudFormationIcon), description: 'Automated infrastructure provisioning with reusable templates and stack management' },
+      { name: 'AWS General', icon: React.createElement(AwsIcon), description: '5+ years building cloud-native solutions across 20+ AWS services' },
     ],
   },
   {
     title: 'Containerization & Orchestration',
     skills: [
-      { name: 'Docker', icon: React.createElement(DockerIcon) },
-      { name: 'Kubernetes', icon: React.createElement(KubernetesIcon) },
+      { name: 'Docker', icon: React.createElement(DockerIcon), description: 'Containerized applications with multi-stage builds and optimized image layers' },
+      { name: 'Kubernetes', icon: React.createElement(KubernetesIcon), description: 'Deployed production workloads with Helm charts, ingress controllers, and monitoring' },
     ],
   },
   {
     title: 'Infrastructure as Code',
     skills: [
-      { name: 'Terraform', icon: React.createElement(TerraformIcon) },
-      { name: 'Ansible', icon: React.createElement(AnsibleIcon) },
+      { name: 'Terraform', icon: React.createElement(TerraformIcon), description: 'Provisioned cloud infrastructure with modules, state management, and CI/CD integration' },
+      { name: 'Ansible', icon: React.createElement(AnsibleIcon), description: 'Automated server configuration and application deployment across multiple environments' },
     ],
   },
   {
     title: 'CI/CD',
     skills: [
-      { name: 'Jenkins', icon: React.createElement(JenkinsIcon) },
-      { name: 'GitHub Actions', icon: React.createElement(GithubActionsIcon) },
+      { name: 'Jenkins', icon: React.createElement(JenkinsIcon), description: 'Built automated pipelines with blue-green deployments and quality gates' },
+      { name: 'GitHub Actions', icon: React.createElement(GithubActionsIcon), description: 'Created workflows for testing, security scanning, and multi-environment deployments' },
     ],
   },
    {
     title: 'Monitoring & Logging',
     skills: [
-      { name: 'Prometheus', icon: React.createElement(PrometheusIcon) },
-      { name: 'Grafana', icon: React.createElement(GrafanaIcon) },
+      { name: 'Prometheus', icon: React.createElement(PrometheusIcon), description: 'Implemented metrics collection with custom exporters and alerting rules' },
+      { name: 'Grafana', icon: React.createElement(GrafanaIcon), description: 'Built comprehensive dashboards for infrastructure and application monitoring' },
     ],
   },
   {
     title: 'Tools & Scripting',
     skills: [
-      { name: 'Python', icon: React.createElement(PythonIcon) },
-      { name: 'Bash', icon: React.createElement(BashIcon) },
-      { name: 'Git', icon: React.createElement(GitIcon) },
-      { name: 'Linux', icon: React.createElement(LinuxIcon) },
+      { name: 'Python', icon: React.createElement(PythonIcon), description: 'Developed automation scripts, APIs, and data processing pipelines' },
+      { name: 'Bash', icon: React.createElement(BashIcon), description: 'Created system administration scripts and deployment automation tools' },
+      { name: 'Git', icon: React.createElement(GitIcon), description: 'Managed code repositories with branching strategies and collaborative workflows' },
+      { name: 'Linux', icon: React.createElement(LinuxIcon), description: 'Administered servers, optimized performance, and implemented security hardening' },
     ],
   },
 ];
