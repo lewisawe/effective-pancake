@@ -1,27 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
 import SectionTitle from './ui/SectionTitle';
-import useOnScreen from '../hooks/useOnScreen';
 
-const HELP_MESSAGE = [
-  'Available commands:',
-  '  <span class="text-cyan-400">contact</span>   - Initiate contact sequence.',
-  '  <span class="text-cyan-400">help</span>      - Show this help message.',
-  '  <span class="text-cyan-400">clear</span>     - Clear the terminal.',
-  '  <span class="text-cyan-400">reset</span>     - Reset the contact form.',
-];
+const escapeHtml = (text: string): string =>
+  text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 const Contact: React.FC = () => {
-  const sectionRef = useRef<HTMLElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalBodyRef = useRef<HTMLDivElement>(null);
 
-  const isVisible = useOnScreen(sectionRef, { threshold: 0.2, triggerOnce: true });
-
-  const [history, setHistory] = useState<string[]>(['Welcome to my terminal. Type `help` for a list of commands.']);
+  const [history, setHistory] = useState<string[]>([
+    'Type <span class="text-teal-600">contact</span> to send a message, or <span class="text-teal-600">help</span> for commands.',
+  ]);
   const [command, setCommand] = useState('');
   const [step, setStep] = useState<'prompt' | 'name' | 'email' | 'message' | 'confirm' | 'sending' | 'sent'>('prompt');
   const storedContactInfo = useRef({ name: '', email: '', message: '' });
-
 
   useEffect(() => {
     if (terminalBodyRef.current) {
@@ -29,26 +21,36 @@ const Contact: React.FC = () => {
     }
   }, [history]);
 
-  useEffect(() => {
-    if(isVisible && step !== 'sending') {
-      inputRef.current?.focus();
+  const getPrompt = () => {
+    switch (step) {
+      case 'name': return 'name › ';
+      case 'email': return 'email › ';
+      case 'message': return 'message › ';
+      case 'confirm': return 'confirm › ';
+      default: return '$ ';
     }
-  }, [isVisible, step, history]);
-  
-  const handleTerminalClick = () => {
-    inputRef.current?.focus();
-  }
-  
-  const resetForm = (currentHistory: string[] = history) => {
-    setHistory([...currentHistory, 'Resetting contact sequence...', 'Type `contact` to start over.']);
+  };
+
+  const getAriaLabel = () => {
+    switch (step) {
+      case 'name': return 'Enter your name';
+      case 'email': return 'Enter your email address';
+      case 'message': return 'Enter your message';
+      case 'confirm': return 'Type send to confirm or reset to start over';
+      default: return 'Terminal command input. Type help for available commands.';
+    }
+  };
+
+  const resetForm = (currentHistory: string[]) => {
+    setHistory([...currentHistory, 'Form reset. Type <span class="text-teal-600">contact</span> to start over.']);
     storedContactInfo.current = { name: '', email: '', message: '' };
     setStep('prompt');
-  }
+  };
 
-  const handleCommandSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const newHistory = [...history, `${getPrompt()}${command}`];
-    
+    const newHistory = [...history, `<span class="text-ink-faint">${escapeHtml(getPrompt())}</span>${escapeHtml(command)}`];
+
     if (step !== 'prompt') {
       processContactStep(command, newHistory);
       return;
@@ -56,12 +58,16 @@ const Contact: React.FC = () => {
 
     switch (command.toLowerCase().trim()) {
       case 'help':
-        setHistory([...newHistory, ...HELP_MESSAGE]);
+        setHistory([...newHistory,
+          'Commands:',
+          '  <span class="text-teal-600">contact</span>  Start the contact form',
+          '  <span class="text-teal-600">clear</span>    Clear the terminal',
+          '  <span class="text-teal-600">reset</span>    Reset the form',
+        ]);
         break;
       case 'contact':
-        setHistory([...newHistory, 'Initiating contact sequence...']);
+        setHistory([...newHistory, 'Starting contact form. Type <span class="text-teal-600">reset</span> at any step to start over.', '', 'Enter your name:']);
         setStep('name');
-        setTimeout(() => setHistory(prev => [...prev, 'Please enter your name:']), 100);
         break;
       case 'clear':
         setHistory([]);
@@ -73,135 +79,112 @@ const Contact: React.FC = () => {
         setHistory(newHistory);
         break;
       default:
-        setHistory([...newHistory, `Command not found: ${command}. Type 'help'.`]);
+        setHistory([...newHistory, `Unknown command: ${escapeHtml(command)}. Type <span class="text-teal-600">help</span> for options.`]);
         break;
     }
     setCommand('');
   };
 
   const processContactStep = async (value: string, currentHistory: string[]) => {
-    const trimmedValue = value.trim();
-    if (trimmedValue.toLowerCase() === 'reset') {
-        resetForm(currentHistory);
-        setCommand('');
-        return;
-    }
-    
-    if (trimmedValue === '') {
-        setHistory(currentHistory);
-        setCommand('');
-        return;
-    }
+    const trimmed = value.trim();
+    if (trimmed.toLowerCase() === 'reset') { resetForm(currentHistory); setCommand(''); return; }
+    if (trimmed === '') { setHistory(currentHistory); setCommand(''); return; }
 
     switch (step) {
       case 'name':
-        storedContactInfo.current.name = trimmedValue;
-        setHistory([...currentHistory, 'Please enter your email:']);
+        storedContactInfo.current.name = trimmed;
+        setHistory([...currentHistory, 'Enter your email:']);
         setStep('email');
         break;
       case 'email':
-        storedContactInfo.current.email = trimmedValue;
-        setHistory([...currentHistory, 'Please enter your message:']);
+        if (!trimmed.includes('@')) {
+          setHistory([...currentHistory, '<span class="text-amber-600">Please enter a valid email address.</span>']);
+          setCommand('');
+          return;
+        }
+        storedContactInfo.current.email = trimmed;
+        setHistory([...currentHistory, 'Enter your message:']);
         setStep('message');
         break;
       case 'message':
-        storedContactInfo.current.message = trimmedValue;
-        setHistory([
-            ...currentHistory,
-            '---',
-            'Review your message:',
-            `<span class="text-gray-400">Name:</span> ${storedContactInfo.current.name}`,
-            `<span class="text-gray-400">Email:</span> ${storedContactInfo.current.email}`,
-            `<span class="text-gray-400">Message:</span> ${trimmedValue}`,
-            '---',
-            'Type <span class="text-cyan-400">send</span> to transmit or <span class="text-cyan-400">reset</span> to start over.',
+        storedContactInfo.current.message = trimmed;
+        setHistory([...currentHistory,
+          '',
+          `Name: ${escapeHtml(storedContactInfo.current.name)}`,
+          `Email: ${escapeHtml(storedContactInfo.current.email)}`,
+          `Message: ${escapeHtml(trimmed)}`,
+          '',
+          'Type <span class="text-teal-600">send</span> to submit or <span class="text-teal-600">reset</span> to start over.',
         ]);
         setStep('confirm');
         break;
       case 'confirm':
-        if (trimmedValue.toLowerCase() === 'send') {
-          setHistory([...currentHistory, 'Transmitting message...']);
+        if (trimmed.toLowerCase() === 'send') {
+          setHistory([...currentHistory, 'Sending...']);
           setStep('sending');
-          
-          // Send to Lambda Function URL
           try {
             const response = await fetch('https://derzekt4zpgaxew7eqbjljgnt40kdztv.lambda-url.eu-west-1.on.aws/', {
               method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                name: storedContactInfo.current.name,
-                email: storedContactInfo.current.email,
-                message: storedContactInfo.current.message
-              })
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(storedContactInfo.current),
             });
-
             if (response.ok) {
-              setHistory(prev => [...prev, '<span class="text-green-400">Success!</span> Message transmitted via secure channel. I will get back to you shortly.', 'You can now type `reset` or `clear`.']);
+              setHistory(prev => [...prev, '<span class="text-teal-600">Message sent.</span> I\'ll get back to you shortly.']);
             } else {
-              setHistory(prev => [...prev, '<span class="text-red-400">Error:</span> Transmission failed. Please try again or contact directly.', 'You can now type `reset` or `clear`.']);
+              setHistory(prev => [...prev, '<span class="text-red-600">Failed to send. Please try again or reach out directly.</span>']);
             }
-          } catch (error) {
-            setHistory(prev => [...prev, '<span class="text-red-400">Error:</span> Network transmission failed. Please try again.', 'You can now type `reset` or `clear`.']);
+          } catch {
+            setHistory(prev => [...prev, '<span class="text-red-600">Network error. Please try again.</span>']);
           }
-          
           setStep('sent');
         } else {
-             setHistory([...currentHistory, 'Invalid command. Type "send" or "reset".']);
+          setHistory([...currentHistory, 'Type <span class="text-teal-600">send</span> or <span class="text-teal-600">reset</span>.']);
         }
         break;
     }
     setCommand('');
   };
 
-  const getPrompt = () => {
-    switch (step) {
-      case 'name': return 'name > ';
-      case 'email': return 'email > ';
-      case 'message': return 'message > ';
-      case 'confirm': return 'confirm > ';
-      default: return '$ ';
-    }
-  }
-
   return (
-    <section id="contact" ref={sectionRef} className="py-16 md:py-24">
-      <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-        <SectionTitle title="[ Initiate Contact ]" />
-      </div>
-      <div 
-        className={`mt-12 w-full max-w-4xl mx-auto h-80 sm:h-96 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-        onClick={handleTerminalClick}
+    <section id="contact" className="py-16 md:py-24">
+      <SectionTitle title="Contact" />
+      <p className="mt-4 text-sm text-ink-muted max-w-md">
+        Send me a message through the terminal below. Type <code className="font-mono text-teal-400 bg-teal-900/30 px-1 rounded">contact</code> to start.
+      </p>
+      <div
+        className="mt-8 w-full max-w-2xl h-72 sm:h-96 cursor-text"
+        onClick={() => inputRef.current?.focus()}
+        role="application"
+        aria-label="Terminal contact form"
       >
-        <div className="bg-[#0d1421] border-2 border-cyan-400/30 rounded-md h-full flex flex-col font-mono text-xs sm:text-sm shadow-lg shadow-cyan-500/10">
-          <div className="bg-gray-800/50 p-2 flex items-center rounded-t-md text-xs">
-            <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full mr-1 sm:mr-2"></div>
-            <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full mr-1 sm:mr-2"></div>
-            <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
-            <span className="ml-auto text-gray-400 text-xs hidden sm:inline">lewisksawe.dev -- -zsh</span>
-            <span className="ml-auto text-gray-400 text-xs sm:hidden">terminal</span>
+        <div className="bg-surface-sunken border border-gray-700/50 rounded-lg h-full flex flex-col font-mono text-sm shadow-sm overflow-hidden">
+          <div className="bg-gray-800 px-4 py-2 flex items-center gap-2 text-xs">
+            <span className="w-3 h-3 bg-red-400 rounded-full"></span>
+            <span className="w-3 h-3 bg-amber-400 rounded-full"></span>
+            <span className="w-3 h-3 bg-green-400 rounded-full"></span>
+            <span className="ml-auto text-gray-400 hidden sm:inline">contact — terminal</span>
           </div>
-          <div ref={terminalBodyRef} className="flex-grow p-2 sm:p-4 overflow-y-auto text-gray-300 leading-relaxed text-xs sm:text-sm">
-            {history.map((line, index) => (
-              <div key={index} dangerouslySetInnerHTML={{ __html: line.replace(/ /g, '&nbsp;') }} />
+          <div ref={terminalBodyRef} className="flex-grow p-4 overflow-y-auto text-gray-300 leading-relaxed text-sm bg-gray-900">
+            {history.map((line, i) => (
+              <div key={i} dangerouslySetInnerHTML={{ __html: line }} />
             ))}
             {step !== 'sending' && (
-              <form onSubmit={handleCommandSubmit} className="flex">
-                <label htmlFor="terminal-input" className="text-cyan-400 shrink-0 text-xs sm:text-sm">
+              <form onSubmit={handleSubmit} className="flex mt-1">
+                <label htmlFor="terminal-input" className="text-teal-400 shrink-0">
                   {getPrompt().replace(/ /g, '\u00a0')}
                 </label>
                 <input
                   ref={inputRef}
                   id="terminal-input"
                   type="text"
-                  className="flex-grow bg-transparent border-none outline-none text-gray-200 pl-1 sm:pl-2 caret-cyan-400 text-xs sm:text-sm"
+                  className="flex-grow bg-transparent border-none outline-none text-gray-200 pl-1 caret-teal-400 text-sm"
                   value={command}
                   onChange={(e) => setCommand(e.target.value)}
                   autoComplete="off"
                   autoCapitalize="off"
                   autoCorrect="off"
-                  spellCheck="false"
+                  spellCheck={false}
+                  aria-label={getAriaLabel()}
                 />
               </form>
             )}

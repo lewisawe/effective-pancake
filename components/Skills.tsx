@@ -1,68 +1,41 @@
-import React, { useState, useRef } from 'react';
-import { SKILL_CATEGORIES } from '../constants';
+import React from 'react';
 import SectionTitle from './ui/SectionTitle';
-import useOnScreen from '../hooks/useOnScreen';
+
+const SKILL_GROUPS = [
+  {
+    label: 'DevOps & Automation',
+    skills: ['Docker', 'Kubernetes', 'Terraform', 'Ansible', 'CI/CD Pipelines', 'GitHub Actions', 'Jenkins', 'Infrastructure as Code', 'Prometheus', 'Grafana', 'Alertmanager', 'Linux', 'Bash', 'Python'],
+  },
+  {
+    label: 'Security & SOC',
+    skills: ['SIEM', 'Incident Response', 'Threat Detection', 'Vulnerability Assessment', 'Security Auditing', 'Endpoint Protection', 'Network Security', 'Firewall Configuration', 'Compliance', 'TryHackMe / HackTheBox'],
+  },
+  {
+    label: 'Cloud Platforms',
+    skills: ['AWS (EC2, S3, Lambda, RDS, EKS, VPC, IAM, CloudFormation, CloudWatch)', 'Google Cloud Platform', 'Serverless Architecture', 'Cost Optimization', 'Cloud Migration'],
+  },
+];
 
 const Skills: React.FC = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const isVisible = useOnScreen(sectionRef, { threshold: 0.1, triggerOnce: true });
-  const [activeTab, setActiveTab] = useState(0);
-
   return (
-    <section id="skills" ref={sectionRef} className="py-16 md:py-24">
-      <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-        <SectionTitle title="[ Technical Arsenal ]" />
-      </div>
-      
-      <div className={`mt-12 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-        {/* Tab Navigation */}
-        <div className="flex flex-wrap justify-center gap-1 sm:gap-2 mb-6 sm:mb-8 border-b border-gray-700">
-          {SKILL_CATEGORIES.map((category, index) => (
-            <button
-              key={index}
-              onClick={() => setActiveTab(index)}
-              className={`px-2 sm:px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-300 border-b-2 ${
-                activeTab === index
-                  ? 'text-cyan-400 border-cyan-400'
-                  : 'text-gray-400 border-transparent hover:text-gray-300'
-              }`}
-            >
-              {category.title}
-            </button>
-          ))}
-        </div>
-
-        {/* Skills Grid */}
-        <div className="min-h-[200px]">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
-            {SKILL_CATEGORIES[activeTab].skills.map((skill, index) => (
-              <div
-                key={skill.name}
-                className={`group relative p-2 sm:p-3 md:p-4 bg-gray-800/30 border border-gray-700 rounded-lg hover:border-cyan-400/50 hover:bg-gray-800/50 transition-all duration-300 transform hover:scale-105 ${
-                  isVisible ? 'animate-fade-in' : ''
-                }`}
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="flex flex-col items-center text-center">
-                  <div className="text-2xl sm:text-3xl mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300">
-                    {skill.icon}
-                  </div>
-                  <span className="text-xs sm:text-sm text-gray-300 group-hover:text-cyan-400 transition-colors duration-300">
-                    {skill.name}
-                  </span>
-                </div>
-                
-                {/* Hover Description Tooltip */}
-                {skill.description && (
-                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 sm:px-3 py-1 sm:py-2 bg-gray-900 border border-cyan-400/30 rounded-lg text-xs text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10 w-48 sm:w-64 text-center">
-                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-cyan-400/30"></div>
-                    {skill.description}
-                  </div>
-                )}
-              </div>
-            ))}
+    <section id="skills" className="py-16 md:py-24">
+      <SectionTitle title="Skills" />
+      <div className="mt-10 space-y-8">
+        {SKILL_GROUPS.map((group) => (
+          <div key={group.label}>
+            <h3 className="font-display font-medium text-sm text-ink-muted uppercase tracking-wide mb-3">{group.label}</h3>
+            <div className="flex flex-wrap gap-2">
+              {group.skills.map((skill) => (
+                <span
+                  key={skill}
+                  className="inline-block px-3 py-1.5 text-sm font-medium text-teal-300 bg-teal-900/30 border border-teal-700/50 rounded-md"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
           </div>
-        </div>
+        ))}
       </div>
     </section>
   );

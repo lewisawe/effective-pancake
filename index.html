@@ -3,162 +3,155 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lewis Sawe - Cloud Engineer & DevOps Specialist</title>
-  <meta name="description" content="Lewis Sawe - Cloud Engineer and DevOps specialist with expertise in AWS, Terraform, and modern infrastructure. View my portfolio showcasing technical projects and skills.">
-  <meta name="keywords" content="Lewis Sawe, Cloud Engineer, DevOps, AWS, Terraform, Infrastructure, Portfolio">
+  <title>Lewis Sawe — DevOps & Security Engineer</title>
+  <meta name="description" content="Lewis Sawe — DevOps and Security Engineer. AWS Security Specialty certified. Building automated infrastructure and security systems.">
+  <meta name="keywords" content="Lewis Sawe, Cloud Engineer, DevOps, AWS, Terraform, Infrastructure, Portfolio, Kenya">
   <meta name="author" content="Lewis Sawe">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#0a0f18">
+  <meta name="theme-color" content="#161b22">
   <meta name="color-scheme" content="dark">
-  <meta name="format-detection" content="telephone=no">
-  
-  <!-- Open Graph / Facebook -->
+
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://lewisawe.is-a.dev/">
-  <meta property="og:title" content="Lewis Sawe - Cloud Engineer & DevOps Specialist">
-  <meta property="og:description" content="Cloud Engineer and DevOps specialist with expertise in AWS, Terraform, and modern infrastructure.">
+  <meta property="og:title" content="Lewis Sawe — DevOps & Security Engineer">
+  <meta property="og:description" content="DevOps and Security Engineer. AWS Security Specialty certified. Building automated infrastructure and security systems.">
   <meta property="og:image" content="https://lewisawe.is-a.dev/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  
-  <!-- Twitter -->
+
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://lewisawe.is-a.dev/">
-  <meta property="twitter:title" content="Lewis Sawe - Cloud Engineer & DevOps Specialist">
-  <meta property="twitter:description" content="Cloud Engineer and DevOps specialist with expertise in AWS, Terraform, and modern infrastructure.">
+  <meta property="twitter:title" content="Lewis Sawe — DevOps & Security Engineer">
+  <meta property="twitter:description" content="DevOps and Security Engineer. AWS Security Specialty certified. Building automated infrastructure and security systems.">
   <meta property="twitter:image" content="https://lewisawe.is-a.dev/og-image.png">
-  
-  <!-- Favicon -->
+
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.svg">
   <link rel="manifest" href="/manifest.json">
   <link rel="canonical" href="https://lewisawe.is-a.dev/">
-  
-  <!-- Preload critical resources -->
-  <link rel="preload" href="/index.tsx" as="script">
+
+  <!-- Fonts: Satoshi for display, JetBrains Mono for terminal -->
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
   <link rel="preconnect" href="https://cdn.tailwindcss.com">
-  <link rel="preconnect" href="https://esm.sh">
   <link rel="dns-prefetch" href="//github.com">
   <link rel="dns-prefetch" href="//linkedin.com">
-  
-  <!-- JSON-LD Structured Data -->
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Lewis Sawe",
-    "jobTitle": "Cloud Engineer & DevOps Specialist",
-    "description": "Cloud Engineer and DevOps specialist with expertise in AWS, Terraform, and modern infrastructure",
+    "jobTitle": "DevOps & Security Engineer",
+    "description": "DevOps and Security Engineer. AWS Security Specialty certified",
     "url": "https://lewisawe.is-a.dev",
     "sameAs": [
       "https://github.com/lewisawe",
-      "https://linkedin.com/in/lewissawe"
+      "https://linkedin.com/in/lewisawe",
+      "https://dev.to/lewisawe",
+      "https://lewisawe.hashnode.dev"
     ],
-    "knowsAbout": [
-      "AWS",
-      "Cloud Engineering",
-      "DevOps",
-      "Terraform",
-      "Infrastructure as Code",
-      "Kubernetes",
-      "Docker",
-      "CI/CD"
-    ]
+    "knowsAbout": ["AWS", "Cloud Engineering", "DevOps", "Terraform", "Kubernetes", "Docker", "Network Architecture", "Security"]
   }
   </script>
+
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            teal: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              200: '#99f6e4',
+              300: '#5eead4',
+              400: '#2dd4bf',
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e',
+              800: '#115e59',
+              900: '#134e4a',
+            },
+            surface: {
+              base: '#161b22',
+              raised: '#1c2129',
+              sunken: '#0d1117',
+            },
+            ink: {
+              primary: '#e6edf3',
+              secondary: '#9ca3af',
+              muted: '#6b7280',
+              faint: '#484f58',
+            }
+          },
+          fontFamily: {
+            display: ['Satoshi', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            body: ['ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+          },
+        }
+      }
+    }
+  </script>
+
   <style>
-    /* Cyberpunk scrollbar */
     body {
-        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    }
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #0a0f18;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #0891b2; /* Tailwind cyan-600 */
-      border-radius: 4px;
-      border: 1px solid #0a0f18;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #06b6d4; /* Tailwind cyan-500 */
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #161b22;
+      color: #e6edf3;
     }
 
-    /* Cyberpunk glitch effect */
-    .glitch-text {
-      position: relative;
-      animation: glitch 2s infinite;
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0d1117; }
+    ::-webkit-scrollbar-thumb { background: #484f58; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #6b7280; }
+
+    h1, h2, h3, h4, h5, h6 { font-family: 'Satoshi', ui-sans-serif, system-ui, sans-serif; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
     }
-    
-    .glitch-text:before,
-    .glitch-text:after {
-      content: attr(data-text);
+
+    /* Skip to content link */
+    .skip-link {
       position: absolute;
+      top: -100%;
+      left: 16px;
+      z-index: 100;
+      padding: 8px 16px;
+      background: #2dd4bf;
+      color: #0d1117;
+      border-radius: 0 0 4px 4px;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .skip-link:focus {
       top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-    
-    .glitch-text:before {
-      animation: glitch-1 0.5s infinite;
-      color: #ff0040;
-      z-index: -1;
-    }
-    
-    .glitch-text:after {
-      animation: glitch-2 0.5s infinite;
-      color: #00ffff;
-      z-index: -2;
-    }
-    
-    @keyframes glitch {
-      0%, 74%, 76%, 100% {
-        transform: translate(0);
-      }
-      75% {
-        transform: translate(-2px, 2px);
-      }
-    }
-    
-    @keyframes glitch-1 {
-      0%, 74%, 76%, 100% {
-        transform: translate(0);
-      }
-      75% {
-        transform: translate(2px, -2px);
-      }
-    }
-    
-    @keyframes glitch-2 {
-      0%, 74%, 76%, 100% {
-        transform: translate(0);
-      }
-      75% {
-        transform: translate(-2px, -2px);
-      }
     }
   </style>
+
   <script type="importmap">
 {
   "imports": {
     "react": "https://esm.sh/react@18.2.0",
     "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
     "react/": "https://esm.sh/react@18.2.0/",
-    "react-tsparticles": "https://cdn.jsdelivr.net/npm/react-tsparticles@2.12.2/+esm",
-    "tsparticles-slim": "https://cdn.jsdelivr.net/npm/tsparticles-slim@2.12.2/+esm",
-    "tsparticles-engine": "https://cdn.jsdelivr.net/npm/tsparticles-engine@2.12.0/+esm",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
   }
 }
 </script>
 <link rel="stylesheet" href="/index.css">
 </head>
-<body class="bg-[#0a0f18] text-gray-100 font-sans leading-normal tracking-normal">
+<body class="bg-surface-base text-ink-primary font-body leading-normal tracking-normal antialiased">
+  <a href="#main-content" class="skip-link">Skip to content</a>
   <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>

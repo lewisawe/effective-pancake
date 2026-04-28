@@ -1,19 +1,3 @@
-import type { ReactElement } from 'react';
-
-export interface Skill {
-  name: string;
-  // Fix: The 'JSX' namespace is not available in a .ts file. Using ReactElement type instead.
-  icon: ReactElement;
-  level: 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
-  experience: string;
-  description?: string;
-}
-
-export interface SkillCategory {
-  title: string;
-  skills: Skill[];
-}
-
 export interface Project {
   title: string;
   description: string;
@@ -29,16 +13,9 @@ export interface ExperienceItem {
   description: string[];
 }
 
-export interface Certification {
-  name: string;
-  issuer: string;
-  url: string;
-  icon: ReactElement;
-}
-
 export interface YouTubeVideo {
   title: string;
-  id: string; // YouTube video ID
+  id: string;
 }
 
 export interface BlogPost {

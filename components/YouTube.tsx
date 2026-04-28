@@ -1,89 +1,48 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import SectionTitle from './ui/SectionTitle';
-import Card from './ui/Card';
-import { YOUTUBE_VIDEOS } from '../constants';
 import { YouTubeIcon } from './ui/Icons';
-import useOnScreen from '../hooks/useOnScreen';
+
+const YOUTUBE_VIDEOS = [
+  { title: 'The AWS Developer Toolbox: Your Ultimate Cloud Companion', id: 'vlbSit2Keao' },
+  { title: 'Your Cloud Bill is burning money, here is why', id: 'pKbv21MHRd0' },
+  { title: 'Decentralised Authentication with AWS Cognito', id: 'wnGywzFIN0k' },
+];
 
 const YouTube: React.FC = () => {
-  const featuredVideo = YOUTUBE_VIDEOS[0];
-  const otherVideos = YOUTUBE_VIDEOS.slice(1);
-  const sectionRef = useRef<HTMLElement>(null);
-  const isVisible = useOnScreen(sectionRef, { threshold: 0.1, triggerOnce: true });
-
   return (
-    <section id="youtube" ref={sectionRef} className="py-16 md:py-24">
-       <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-         <SectionTitle title="[ Data Stream // YouTube ]" />
-       </div>
-      <div className="mt-12">
-        {featuredVideo && (
-          <div 
-            className={`mb-8 transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-            style={{ transitionDelay: '150ms' }}
+    <section id="youtube" className="py-16 md:py-24">
+      <SectionTitle title="Videos" />
+      <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {YOUTUBE_VIDEOS.map((video) => (
+          <a
+            key={video.id}
+            href={`https://www.youtube.com/watch?v=${video.id}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group block bg-surface-raised border border-gray-700/50 rounded-lg overflow-hidden hover:border-teal-500/50 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-400"
           >
-            <h3 className="text-xl text-cyan-400 mb-4">// Featured Video</h3>
-            <div className="max-w-2xl mx-auto">
-              <Card>
-                <a href={`https://www.youtube.com/watch?v=${featuredVideo.id}`} target="_blank" rel="noopener noreferrer" className="block group">
-                  <div className="relative">
-                    <img 
-                      src={`https://i.ytimg.com/vi/${featuredVideo.id}/hqdefault.jpg`}
-                      alt={featuredVideo.title}
-                      className="w-full h-auto object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-colors flex items-center justify-center">
-                      <div className="w-16 h-16 text-white opacity-80 group-hover:opacity-100 group-hover:scale-110 transform transition-all">
-                        <YouTubeIcon />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="p-3 bg-[#0d1421]">
-                    <h4 className="text-base font-bold text-gray-200 group-hover:text-cyan-400 transition-colors">{featuredVideo.title}</h4>
-                  </div>
-                </a>
-              </Card>
-            </div>
-          </div>
-        )}
-
-        {otherVideos.length > 0 && (
-          <div className={`transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-            style={{ transitionDelay: '300ms' }}>
-            <h3 className="text-xl text-cyan-400 mb-4">// More Videos</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {otherVideos.map((video, index) => (
-                <div 
-                  key={video.id}
-                  className={`transition-all duration-500 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-                  style={{ transitionDelay: `${isVisible ? 400 + index * 150 : 0}ms` }}
-                >
-                  <Card>
-                    <a href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 p-4 group">
-                      <img 
-                        src={`https://i.ytimg.com/vi/${video.id}/default.jpg`}
-                        alt={video.title}
-                        className="w-20 h-auto object-cover flex-shrink-0"
-                      />
-                      <h4 className="font-semibold text-gray-300 group-hover:text-cyan-400 transition-colors">{video.title}</h4>
-                    </a>
-                  </Card>
+            <div className="relative aspect-video bg-surface-sunken">
+              <img
+                src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
+                alt={video.title}
+                width={480}
+                height={360}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-ink-primary/30 group-hover:bg-ink-primary/10 transition-colors duration-200 flex items-center justify-center">
+                <div className="w-12 h-12 text-white opacity-90">
+                  <YouTubeIcon />
                 </div>
-              ))}
+              </div>
             </div>
-          </div>
-        )}
-
-        <div className={`text-center mt-12 transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-             style={{ transitionDelay: '500ms' }}>
-          <a 
-            href="https://www.youtube.com"
-            target="_blank" rel="noopener noreferrer"
-            className="inline-block px-8 py-3 border-2 border-cyan-400 text-cyan-400 font-bold uppercase tracking-widest transition-all duration-300 hover:bg-cyan-400 hover:text-gray-900 hover:shadow-lg hover:shadow-cyan-500/30"
-          >
-            Visit Channel
+            <div className="p-4">
+              <h3 className="font-display font-medium text-sm text-ink-primary group-hover:text-teal-400 transition-colors leading-snug">
+                {video.title}
+              </h3>
+            </div>
           </a>
-        </div>
+        ))}
       </div>
     </section>
   );

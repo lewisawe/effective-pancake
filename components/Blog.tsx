@@ -1,59 +1,80 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import SectionTitle from './ui/SectionTitle';
-import Card from './ui/Card';
-import Tag from './ui/Tag';
-import { BLOG_POSTS } from '../constants';
-import { ExternalLinkIcon } from './ui/Icons';
-import useOnScreen from '../hooks/useOnScreen';
+
+const BLOG_POSTS = [
+  {
+    title: 'What Happens When You Red-Team Your Own Agent',
+    url: 'https://lewisawe.hashnode.dev/what-happens-when-you-red-team-your-own-agent',
+    source: 'Hashnode',
+    tags: ['Security', 'AI'],
+  },
+  {
+    title: 'Building Multi-Agent AWS Operations Intelligence with Amazon Bedrock AgentCore',
+    url: 'https://dev.to/lewisawe',
+    source: 'dev.to',
+    tags: ['AWS', 'AI', 'Bedrock'],
+  },
+  {
+    title: 'Creating a Flood Awareness PSA with AWS Nova Canvas',
+    url: 'https://lewisawe.hashnode.dev/creating-a-flood-awareness-psa-with-aws-nova-canvas',
+    source: 'Hashnode',
+    tags: ['AWS', 'AI', 'Social Impact'],
+  },
+  {
+    title: 'Common Pitfalls That Can Make Your AWS Cloud Bill Balloon',
+    url: 'https://dev.to/lewisawe',
+    source: 'dev.to',
+    tags: ['AWS', 'Cost Optimization', 'FinOps'],
+  },
+  {
+    title: 'I Built "Hackerman" with Amazon Q',
+    url: 'https://dev.to/aws-builders/i-built-hackerman-with-amazon-q-29jn',
+    source: 'dev.to',
+    tags: ['AWS', 'Amazon Q', 'AI'],
+  },
+  {
+    title: 'Juicy Details: THM Challenge Room Walkthrough',
+    url: 'https://lewisawe.hashnode.dev/juicy-details-thm-challenge-room-walkthrough',
+    source: 'Hashnode',
+    tags: ['Security', 'TryHackMe'],
+  },
+];
 
 const Blog: React.FC = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const isVisible = useOnScreen(sectionRef, { threshold: 0.1, triggerOnce: true });
-
   return (
-    <section id="blog" ref={sectionRef} className="py-16 md:py-24">
-      <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-        <SectionTitle title="[ Knowledge Base // Blog ]" />
-      </div>
-      <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
-        {BLOG_POSTS.map((post, index) => (
-          <div
+    <section id="blog" className="py-16 md:py-24">
+      <SectionTitle title="Writing" />
+      <p className="mt-4 text-sm text-ink-muted">
+        Articles on{' '}
+        <a href="https://dev.to/lewisawe" target="_blank" rel="noopener noreferrer" className="text-teal-400 hover:text-teal-300 underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-400 rounded">dev.to</a>
+        {' '}and{' '}
+        <a href="https://lewisawe.hashnode.dev" target="_blank" rel="noopener noreferrer" className="text-teal-400 hover:text-teal-300 underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-400 rounded">Hashnode</a>.
+      </p>
+      <div className="mt-8 space-y-4">
+        {BLOG_POSTS.map((post) => (
+          <a
             key={post.title}
-            className={`transition-all duration-500 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-            style={{ transitionDelay: `${isVisible ? index * 150 : 0}ms` }}
+            href={post.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-start justify-between gap-4 py-3 border-b border-gray-700/30 hover:border-teal-500/40 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-400 rounded"
           >
-            <Card>
-              <div className="p-6 h-full flex flex-col group">
-                <div className="mb-4">
-                  <p className="text-sm text-gray-500 mb-1">{post.date}</p>
-                  <h3 className="text-xl font-bold text-cyan-400">{post.title}</h3>
-                </div>
-                <p className="text-gray-400 flex-grow">{post.description}</p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {post.tags.map((tag) => (
-                    <Tag key={tag}>{tag}</Tag>
-                  ))}
-                </div>
-                <a href={post.url} target="_blank" rel="noopener noreferrer" className="mt-6 text-cyan-400 flex items-center gap-2 self-start font-semibold">
-                  Read More <ExternalLinkIcon />
-                </a>
+            <div className="min-w-0">
+              <h3 className="font-display font-medium text-ink-primary group-hover:text-teal-400 transition-colors leading-snug">
+                {post.title}
+              </h3>
+              <div className="mt-1.5 flex flex-wrap gap-1.5">
+                {post.tags.map((tag) => (
+                  <span key={tag} className="text-xs text-ink-muted bg-surface-sunken px-2 py-0.5 rounded">
+                    {tag}
+                  </span>
+                ))}
               </div>
-            </Card>
-          </div>
+            </div>
+            <span className="text-xs text-ink-faint shrink-0 mt-1 hidden sm:block">{post.source}</span>
+          </a>
         ))}
       </div>
-       <div 
-        className={`text-center mt-12 transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-        style={{ transitionDelay: '300ms' }}
-       >
-          <a 
-            href="#"
-            target="_blank" rel="noopener noreferrer"
-            className="inline-block px-8 py-3 border-2 border-cyan-400 text-cyan-400 font-bold uppercase tracking-widest transition-all duration-300 hover:bg-cyan-400 hover:text-gray-900 hover:shadow-lg hover:shadow-cyan-500/30"
-          >
-            View All Posts
-          </a>
-        </div>
     </section>
   );
 };

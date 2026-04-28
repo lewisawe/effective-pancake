@@ -1,36 +1,39 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import SectionTitle from './ui/SectionTitle';
-import Card from './ui/Card';
-import { CERTIFICATIONS } from '../constants';
-import { ExternalLinkIcon } from './ui/Icons';
-import useOnScreen from '../hooks/useOnScreen';
+
+const CERTIFICATIONS = [
+  { name: 'Security Specialty', issuer: 'AWS', year: '2023' },
+  { name: 'Solutions Architect Associate', issuer: 'AWS', year: '2023' },
+  { name: 'Developer Associate', issuer: 'AWS', year: '2023' },
+  { name: 'Data Engineer Associate', issuer: 'AWS', year: '2024' },
+  { name: 'CloudOps Engineer Associate', issuer: 'AWS', year: '2024' },
+  { name: 'Cloud Engineer Associate', issuer: 'Google', year: '2023' },
+  { name: 'Project Management Professional Certificate', issuer: 'Google', year: '2024' },
+  { name: 'CCNA', issuer: 'Cisco', year: '2022' },
+  { name: 'Kubernetes & Cloud Native Associate', issuer: 'CNCF', year: '2023' },
+  { name: 'AI Practitioner', issuer: 'AWS', year: '2024' },
+];
 
 const Certifications: React.FC = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const isVisible = useOnScreen(sectionRef, { threshold: 0.1, triggerOnce: true });
-
   return (
-    <section id="certifications" ref={sectionRef} className="py-16 md:py-24">
-       <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-         <SectionTitle title="[ Certifications ]" />
-       </div>
-      <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {CERTIFICATIONS.map((cert, index) => (
+    <section id="certifications" className="py-16 md:py-24">
+      <SectionTitle title="Certifications" />
+      <p className="mt-4 text-sm text-ink-muted">
+        <a href="https://www.credly.com/users/lewisawe" target="_blank" rel="noopener noreferrer" className="text-teal-400 hover:text-teal-300 underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-400 rounded">
+          Verify on Credly
+        </a>
+      </p>
+      <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {CERTIFICATIONS.map((cert) => (
           <div
             key={cert.name}
-            className={`transition-all duration-500 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-            style={{ transitionDelay: `${isVisible ? index * 150 : 0}ms` }}
+            className="flex items-center justify-between gap-3 px-4 py-3 bg-surface-raised border border-gray-700/50 rounded-lg"
           >
-            <Card>
-              <a href={cert.url} target="_blank" rel="noopener noreferrer" className="p-6 h-full flex flex-col items-center text-center group">
-                <div className="w-16 h-16 mb-4 text-cyan-400">{cert.icon}</div>
-                <h3 className="text-lg font-bold text-gray-200 flex-grow">{cert.name}</h3>
-                <p className="text-sm text-gray-500 mt-1">{cert.issuer}</p>
-                <div className="mt-4 text-cyan-400 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  Verify Credential <ExternalLinkIcon />
-                </div>
-              </a>
-            </Card>
+            <div className="min-w-0">
+              <p className="font-display font-medium text-sm text-ink-primary truncate">{cert.name}</p>
+              <p className="text-xs text-ink-muted">{cert.issuer}</p>
+            </div>
+            <span className="text-xs text-ink-faint shrink-0">{cert.year}</span>
           </div>
         ))}
       </div>

@@ -1,45 +1,78 @@
-import React, { useRef } from 'react';
-import { EXPERIENCE } from '../constants';
+import React from 'react';
 import SectionTitle from './ui/SectionTitle';
-import type { ExperienceItem } from '../types';
-import useOnScreen from '../hooks/useOnScreen';
 
-const ExperienceCard: React.FC<{ item: ExperienceItem, isVisible: boolean }> = ({ item, isVisible }) => (
-  <div className={`relative pl-8 sm:pl-12 py-6 group transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
-    {/* The timeline line */}
-    <div className="absolute top-0 left-0 h-full w-px bg-cyan-900/50"></div>
-    {/* The timeline node */}
-    <div className="absolute top-8 left-[-9px] w-5 h-5 rounded-full bg-gray-800 border-2 border-cyan-400 transition-all duration-300 group-hover:bg-cyan-400 group-hover:scale-110"></div>
-    
-    <div className="mb-2">
-      <h3 className="text-xl font-bold text-cyan-400">{item.role}</h3>
-      <p className="text-md text-gray-400">{item.company} // {item.period}</p>
-    </div>
-    <ul className="list-disc list-inside text-gray-400 space-y-2">
-      {item.description.map((point, index) => (
-        <li key={index}>{point}</li>
-      ))}
-    </ul>
-  </div>
-);
+const EXPERIENCE = [
+  {
+    role: 'Network & Systems Administrator',
+    company: 'Eloho',
+    period: 'Apr 2024 — Present',
+    description: [
+      'Built security frameworks from scratch across client sites, zero major breaches, monthly security assessments',
+      'Manage AWS cloud infrastructure: EC2, S3, RDS, VPC, IAM, CloudFormation, CloudWatch',
+      'Automated provisioning with Terraform and Ansible, deployed Prometheus and Grafana monitoring',
+      'Set up endpoint protection, firewall policies, and IDS across client sites',
+    ],
+  },
+  {
+    role: 'IT Support Technician',
+    company: 'Elpris Kenya',
+    period: 'Jan 2022 — Mar 2024',
+    description: [
+      'Built automated monitoring systems that caught issues before users reported them',
+      'Deployed security frameworks across 15 client sites, 100% compliance, zero breaches',
+      '99% system availability, 95% issue resolution rate',
+    ],
+  },
+  {
+    role: 'DevOps Intern',
+    company: 'HNG Internship (Remote)',
+    period: 'Nov 2022 — Dec 2022',
+    description: [
+      'Reduced AWS infrastructure costs by 35% through right-sizing and Terraform automation',
+      'Built CI/CD pipelines with Docker containerization, reducing release cycles by 40%',
+      'Standardized dev, staging, and production environments with Docker. 99.9% uptime',
+    ],
+  },
+  {
+    role: 'M&E Assistant',
+    company: 'Kenya Red Cross',
+    period: 'Jun 2020 — Dec 2021',
+    description: [
+      'Designed digital data collection tools replacing paper processes, 40% reduction in processing time',
+    ],
+  },
+  {
+    role: 'IT Intern',
+    company: 'United Nations Office at Nairobi',
+    period: 'Jun 2017 — Dec 2017',
+    description: [
+      'Configured 300+ systems, assisted 500+ users, 100% network uptime for critical operations',
+    ],
+  },
+];
 
 const Experience: React.FC = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const isVisible = useOnScreen(sectionRef, { threshold: 0.1, triggerOnce: true });
-
   return (
-    <section id="experience" ref={sectionRef} className="py-16 md:py-24">
-      <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-        <SectionTitle title="[ Career Trajectory ]" />
-      </div>
-      <div className="mt-12 relative">
+    <section id="experience" className="py-16 md:py-24">
+      <SectionTitle title="Experience" />
+      <div className="mt-10 space-y-10">
         {EXPERIENCE.map((item, index) => (
-           <div 
-             key={index} 
-             style={{ transitionDelay: `${isVisible ? index * 200 : 0}ms` }}
-           >
-              <ExperienceCard item={item} isVisible={isVisible} />
-           </div>
+          <article key={index} className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-2 md:gap-8">
+            <div className="text-sm text-ink-muted font-medium shrink-0 pt-0.5">
+              {item.period}
+            </div>
+            <div>
+              <h3 className="font-display font-bold text-ink-primary">{item.role}</h3>
+              <p className="text-ink-secondary text-sm mt-0.5">{item.company}</p>
+              <ul className="mt-3 space-y-1.5">
+                {item.description.map((point, i) => (
+                  <li key={i} className="text-sm text-ink-secondary leading-relaxed pl-4 relative before:content-['·'] before:absolute before:left-0 before:text-ink-faint">
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </article>
         ))}
       </div>
     </section>

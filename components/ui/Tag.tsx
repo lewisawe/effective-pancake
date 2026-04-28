@@ -1,16 +1,9 @@
-
 import React from 'react';
 
-interface TagProps {
-  children: React.ReactNode;
-}
-
-const Tag: React.FC<TagProps> = ({ children }) => {
-  return (
-    <span className="bg-cyan-900/50 text-cyan-300 text-xs font-semibold px-2.5 py-1 rounded-sm">
-      {children}
-    </span>
-  );
-};
+const Tag: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <span className="text-xs font-medium text-ink-muted bg-surface-sunken px-2 py-1 rounded">
+    {children}
+  </span>
+);
 
 export default Tag;
