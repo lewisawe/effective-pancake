@@ -62,3 +62,8 @@ terraform/
 # Temporary files
 *.tmp
 *.temp
+
+# Design system files
+DESIGN*.md
+PRODUCT.md
+.kiro/

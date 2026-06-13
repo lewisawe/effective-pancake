@@ -7,7 +7,7 @@ const EXPERIENCE = [
     company: 'Eloho',
     period: 'Apr 2024 — Present',
     description: [
-      'Built security frameworks from scratch across client sites, zero major breaches, monthly security assessments',
+      'Built security frameworks from scratch across client sites, zero major breaches',
       'Manage AWS cloud infrastructure: EC2, S3, RDS, VPC, IAM, CloudFormation, CloudWatch',
       'Automated provisioning with Terraform and Ansible, deployed Prometheus and Grafana monitoring',
       'Set up endpoint protection, firewall policies, and IDS across client sites',
@@ -25,12 +25,12 @@ const EXPERIENCE = [
   },
   {
     role: 'DevOps Intern',
-    company: 'HNG Internship (Remote)',
+    company: 'HNG Internship',
     period: 'Nov 2022 — Dec 2022',
     description: [
       'Reduced AWS infrastructure costs by 35% through right-sizing and Terraform automation',
-      'Built CI/CD pipelines with Docker containerization, reducing release cycles by 40%',
-      'Standardized dev, staging, and production environments with Docker. 99.9% uptime',
+      'Built CI/CD pipelines with Docker, reducing release cycles by 40%',
+      'Standardized environments with Docker. 99.9% uptime',
     ],
   },
   {
@@ -53,24 +53,26 @@ const EXPERIENCE = [
 
 const Experience: React.FC = () => {
   return (
-    <section id="experience" className="py-16 md:py-24">
+    <section id="experience" className="py-20 md:py-32">
       <SectionTitle title="Experience" />
-      <div className="mt-10 space-y-10">
+      <div className="mt-12 space-y-0">
         {EXPERIENCE.map((item, index) => (
-          <article key={index} className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-2 md:gap-8">
-            <div className="text-sm text-ink-muted font-medium shrink-0 pt-0.5">
-              {item.period}
-            </div>
-            <div>
-              <h3 className="font-display font-bold text-ink-primary">{item.role}</h3>
-              <p className="text-ink-secondary text-sm mt-0.5">{item.company}</p>
-              <ul className="mt-3 space-y-1.5">
-                {item.description.map((point, i) => (
-                  <li key={i} className="text-sm text-ink-secondary leading-relaxed pl-4 relative before:content-['·'] before:absolute before:left-0 before:text-ink-faint">
-                    {point}
-                  </li>
-                ))}
-              </ul>
+          <article key={index} className="border-b border-graphite/60 py-8 first:pt-0 last:border-b-0">
+            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-2 md:gap-8">
+              <div className="text-xs font-mono text-smoke tracking-wide uppercase pt-1">
+                {item.period}
+              </div>
+              <div>
+                <h3 className="font-sans font-bold text-bone-white text-lg">{item.role}</h3>
+                <p className="text-iris text-sm mt-0.5">{item.company}</p>
+                <ul className="mt-3 space-y-1.5">
+                  {item.description.map((point, i) => (
+                    <li key={i} className="text-sm text-smoke leading-relaxed pl-4 relative before:content-['→'] before:absolute before:left-0 before:text-graphite">
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </article>
         ))}

@@ -13,10 +13,10 @@ import Contact from './components/Contact';
 
 const App: React.FC = () => {
   return (
-    <div className="text-ink-primary font-body leading-normal tracking-normal">
+    <div className="bg-void text-bone-white font-sans">
       <Navbar />
-      <main id="main-content" className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
-        <Header />
+      <Header />
+      <main id="main-content" className="max-w-page mx-auto px-6 lg:px-8">
         <About />
         <Skills />
         <Projects />
@@ -27,20 +27,20 @@ const App: React.FC = () => {
         <Speaking />
         <Contact />
       </main>
-      <footer className="py-12 text-center text-ink-muted text-sm border-t border-gray-700/50 mt-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-center gap-4 mb-3">
-            <a href="https://github.com/lewisawe" target="_blank" rel="noopener noreferrer" className="hover:text-ink-primary transition-colors">GitHub</a>
-            <span className="text-ink-faint">·</span>
-            <a href="https://linkedin.com/in/lewisawe" target="_blank" rel="noopener noreferrer" className="hover:text-ink-primary transition-colors">LinkedIn</a>
-            <span className="text-ink-faint">·</span>
-            <a href="https://dev.to/lewisawe" target="_blank" rel="noopener noreferrer" className="hover:text-ink-primary transition-colors">dev.to</a>
-            <span className="text-ink-faint">·</span>
-            <a href="https://lewisawe.hashnode.dev" target="_blank" rel="noopener noreferrer" className="hover:text-ink-primary transition-colors">Hashnode</a>
-          </div>
-          <p>&copy; {new Date().getFullYear()} Lewis Sawe</p>
-        </div>
+
+      {/* Coordinate Footer */}
+      <footer className="fixed bottom-0 left-0 right-0 z-40 border-t border-graphite/40 bg-void/95 backdrop-blur-sm px-6 py-2 flex items-center justify-between">
+        <span className="text-xs font-mono text-slate">+ Fly Direct Cloud Engineer</span>
+        <span className="text-xs font-mono text-slate flex items-center gap-2">
+          1.2921° S, 36.8219° E
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" className="text-iris">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </span>
       </footer>
+
+      {/* Spacer for fixed footer */}
+      <div className="h-10" />
     </div>
   );
 };

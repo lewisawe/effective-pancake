@@ -42,36 +42,37 @@ const BLOG_POSTS = [
 
 const Blog: React.FC = () => {
   return (
-    <section id="blog" className="py-16 md:py-24">
+    <section id="blog" className="py-20 md:py-32">
       <SectionTitle title="Writing" />
-      <p className="mt-4 text-sm text-ink-muted">
+      <p className="mt-4 text-sm text-smoke">
         Articles on{' '}
-        <a href="https://dev.to/lewisawe" target="_blank" rel="noopener noreferrer" className="text-teal-400 hover:text-teal-300 underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-400 rounded">dev.to</a>
+        <a href="https://dev.to/lewisawe" target="_blank" rel="noopener noreferrer" className="text-iris hover:text-lavender-wash underline underline-offset-2 transition-colors">dev.to</a>
         {' '}and{' '}
-        <a href="https://lewisawe.hashnode.dev" target="_blank" rel="noopener noreferrer" className="text-teal-400 hover:text-teal-300 underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-400 rounded">Hashnode</a>.
+        <a href="https://lewisawe.hashnode.dev" target="_blank" rel="noopener noreferrer" className="text-iris hover:text-lavender-wash underline underline-offset-2 transition-colors">Hashnode</a>.
       </p>
-      <div className="mt-8 space-y-4">
+      <div className="mt-8 space-y-0">
         {BLOG_POSTS.map((post) => (
           <a
             key={post.title}
             href={post.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-start justify-between gap-4 py-3 border-b border-gray-700/30 hover:border-teal-500/40 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-400 rounded"
+            className="group flex items-start justify-between gap-4 py-4 border-b border-graphite/40 hover:border-iris/30 transition-colors duration-200"
           >
             <div className="min-w-0">
-              <h3 className="font-display font-medium text-ink-primary group-hover:text-teal-400 transition-colors leading-snug">
+              <h3 className="font-sans font-medium text-bone-white group-hover:text-iris transition-colors leading-snug">
                 {post.title}
               </h3>
-              <div className="mt-1.5 flex flex-wrap gap-1.5">
+              <div className="mt-2 flex flex-wrap gap-2">
                 {post.tags.map((tag) => (
-                  <span key={tag} className="text-xs text-ink-muted bg-surface-sunken px-2 py-0.5 rounded">
-                    {tag}
-                  </span>
+                  <span key={tag} className="text-xs font-mono text-smoke">{tag}</span>
                 ))}
               </div>
             </div>
-            <span className="text-xs text-ink-faint shrink-0 mt-1 hidden sm:block">{post.source}</span>
+            <div className="flex items-center gap-3 shrink-0 mt-1">
+              <span className="text-xs font-mono text-slate hidden sm:block">{post.source}</span>
+              <span className="text-smoke group-hover:text-iris transition-colors" aria-hidden="true">→</span>
+            </div>
           </a>
         ))}
       </div>

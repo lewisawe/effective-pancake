@@ -10,16 +10,16 @@ const TALKS = [
 
 const Speaking: React.FC = () => {
   return (
-    <section id="speaking" className="py-16 md:py-24">
+    <section id="speaking" className="py-20 md:py-32">
       <SectionTitle title="Speaking" />
       <div className="mt-8 flex flex-wrap gap-3">
         {TALKS.map((talk) => (
           <div
             key={talk.event}
-            className="flex items-center gap-2 px-4 py-2.5 bg-surface-raised border border-gray-700/50 rounded-lg"
+            className="flex items-center gap-3 px-5 py-3 border border-graphite/60 rounded-pill hover:border-iris/30 transition-colors"
           >
-            <span className="font-display font-medium text-sm text-ink-primary">{talk.event}</span>
-            <span className="text-xs text-ink-faint">{talk.type}</span>
+            <span className="font-sans font-medium text-sm text-bone-white">{talk.event}</span>
+            <span className="text-xs font-mono text-slate">{talk.type}</span>
           </div>
         ))}
       </div>
